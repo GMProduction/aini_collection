@@ -24,8 +24,8 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5>Form Produk</h5>
-                <a type="button ms-auto" class="btn btn-primary btn-sm" id="addData" href="/admin/produk/data">Tambah Data Baru
-                </a>
+                {{-- <a type="button ms-auto" class="btn btn-primary btn-sm" id="addData" href="/admin/produk/data">Tambah Data Baru
+                </a> --}}
             </div>
             <form id="formProduk" onsubmit="return saveProduk()">
                 <input id="id" name="id" hidden>

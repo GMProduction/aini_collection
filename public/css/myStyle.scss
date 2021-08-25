@@ -1,12 +1,12 @@
-$primary-color: #39cbbb;
+$primary-color: #FE61B6;
 $surface-color: #fff;
 $text-color: #666;
 $text-color2: #666;
 $curve: 40;
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background-color: #f9fbfd;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff7fb;
 }
 .b-primary {
   background-color: $primary-color;
@@ -106,6 +106,7 @@ body {
     padding: 16px;
     display: flex !important;
     align-items: center;
+    background-color: white;
     margin: 16px;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -277,8 +278,7 @@ nav {
       cursor: pointer;
 
       a {
-        font-size: 1rem;
-        font-weight: 700;
+        // font-size: 1rem;
         color: $text-color !important;
       }
 

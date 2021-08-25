@@ -1,14 +1,14 @@
 body {
-  font-family: 'Nunito', sans-serif;
-  background-color: #f9fbfd;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff7fb;
 }
 
 .b-primary {
-  background-color: #39cbbb;
+  background-color: #FE61B6;
 }
 
 .bt-primary {
-  background-color: #39cbbb;
+  background-color: #FE61B6;
   border-radius: 50px;
   padding: 10px;
   margin-bottom: 10px;
@@ -34,7 +34,7 @@ body {
 }
 
 .t-primary {
-  color: #39cbbb !important;
+  color: #FE61B6 !important;
 }
 
 .t-white {
@@ -99,24 +99,24 @@ body {
 .item-box .totalHarga {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #39cbbb;
+  color: #FE61B6;
 }
 
-.   slider-kategori {
+.slider-kategori {
   padding: 16px;
 }
 
 .slider-kategori .card-kategori {
   all: unset;
-  /*height: 70px;*/
+  height: 70px;
   padding: 16px;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
-    flex-direction: column !important;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: white;
   margin: 16px;
   border-radius: 15px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -128,27 +128,21 @@ body {
 
 .slider-kategori .card-kategori .title {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 0;
 }
 
 .slider-kategori .card-kategori img {
   border-radius: 15px;
-    /*border: 1px solid #cccccc;*/
   -o-object-fit: cover;
      object-fit: cover;
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
   margin-right: 10px;
 }
 
-.slider-kategori .card-kategori:hover  {
-  background-color: #39cbbb;
-    color: white;
-
-}
-.slider-kategori .card-kategori:hover img {
-    background-color: white;
+.slider-kategori .card-kategori:hover {
+  background-color: #FE61B6;
 }
 
 .slider img {
@@ -172,7 +166,7 @@ a .nav-link {
 
 .link {
   cursor: pointer;
-  color: #39cbbb;
+  color: #FE61B6;
 }
 
 .profile-userpic {
@@ -215,7 +209,6 @@ a .nav-link {
 .cardku:hover {
   -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
           box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border: 3px solid red;
 }
 
 .cardku .slick-prev:before,
@@ -237,7 +230,7 @@ a .nav-link {
 .cardku .content .title {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #39cbbb;
+  color: #FE61B6;
 }
 
 .cardku .content .date {
@@ -301,7 +294,7 @@ nav.navtop .icon-sosmed {
 }
 
 nav.navtop .icon-sosmed:hover {
-  fill: #39cbbb;
+  fill: #FE61B6;
   cursor: pointer;
 }
 
@@ -311,13 +304,11 @@ nav.navtop .nav-item {
 }
 
 nav.navtop .nav-item a {
-  font-size: 1rem;
-  font-weight: 700;
   color: #666 !important;
 }
 
 nav.navtop .nav-item a:hover {
-  color: #39cbbb !important;
+  color: #FE61B6 !important;
 }
 
 nav.navscrolled {
@@ -336,7 +327,7 @@ nav.navscrolled .icon-sosmed {
 }
 
 nav.navscrolled .icon-sosmed:hover {
-  fill: #39cbbb;
+  fill: #FE61B6;
   cursor: pointer;
 }
 
@@ -351,7 +342,7 @@ nav.navscrolled .nav-item a {
 }
 
 nav.navscrolled .nav-item a:hover {
-  color: #39cbbb !important;
+  color: #FE61B6 !important;
 }
 
 .table-container {
@@ -487,7 +478,7 @@ nav.navscrolled .nav-item a:hover {
 }
 
 .footerstyle .link:hover {
-  color: #39cbbb;
+  color: #FE61B6;
   cursor: pointer;
 }
 
@@ -499,7 +490,7 @@ nav.navscrolled .nav-item a:hover {
 }
 
 .footerstyle .icon-sosmed:hover {
-  fill: #39cbbb;
+  fill: #FE61B6;
   cursor: pointer;
 }
 
@@ -613,9 +604,9 @@ nav.navscrolled .nav-item a:hover {
 }
 
 .cta-select {
-  border: 2px solid #39cbbb;
+  border: 2px solid #FE61B6;
   background: transparent;
-  color: #39cbbb;
+  color: #FE61B6;
   width: 150px;
   height: 50px;
   cursor: pointer;
@@ -624,7 +615,7 @@ nav.navscrolled .nav-item a:hover {
 }
 
 .cta-add {
-  background: #39cbbb;
+  background: #FE61B6;
   width: 150px;
   height: 50px;
   cursor: pointer;
@@ -638,7 +629,7 @@ nav.navscrolled .nav-item a:hover {
 hr.divider {
   width: 5rem;
   height: 0.2rem;
-  color: #39cbbb;
+  color: #FE61B6;
   text-align: center;
   display: block;
   margin-left: auto;

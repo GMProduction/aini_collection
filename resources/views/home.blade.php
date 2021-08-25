@@ -17,7 +17,7 @@
         <div style="height: 50px"></div>
     </section>
     <section class="container">
-        <h4 class="text-center fw-bold">Kategori</h4>
+        <h4 class="text-center fw-bold">Kategori Kami</h4>
         <div id="kategori" class="">
             <div class="row" style="height: 150px">
                 @for($i = 0; $i < 6; $i++)
