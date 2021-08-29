@@ -67,6 +67,7 @@
             <thead>
               <tr>
                   <th style="width: 10px" class="text-center">#</th>
+                  <th class="text-center">No. Pesanan</th>
                   <th class="text-center">Nama Pelanggan</th>
                   <th class="text-center">Tanggal Pembelian</th>
                   <th style="width: 400px" class="text-center">Produk</th>
@@ -78,6 +79,7 @@
               @forelse($data as $key => $d)
                   <tr>
                       <td>{{$key+1}}</td>
+                      <td>{{$d->no_pemesanan}}</td>
                       <td>{{$d->getPelanggan->nama}}</td>
                       <td>{{date('d F Y', strtotime($d->tanggal_pesanan))}}</td>
                       <td>
@@ -102,7 +104,7 @@
                   </tr>
               @empty
                   <tr>
-                      <td class="text-center" colspan="6">Tidak ada pesanan</td>
+                      <td class="text-center" colspan="7">Tidak ada pesanan</td>
                   </tr>
               @endforelse
               <tr>

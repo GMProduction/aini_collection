@@ -7,6 +7,7 @@ use App\Models\FotoProduk;
 use App\Models\Kategori;
 use App\Models\Keranjang;
 use App\Models\Produk;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class ProdukController extends CustomController
         $laku = Keranjang::with('getPesanan')->where('id_produk', '=', $produk->id)->whereHas(
             'getPesanan',
             function ($q) {
-                return $q->where('status_pesanan', '>=', 2);
+                return $q->where([['status_pesanan', '>=', 2],['status_pesanan', '!=', 7]]);
             }
         )->sum('qty');
         $sisa = (int) $produk->stok - (int) $laku;
@@ -63,5 +64,10 @@ class ProdukController extends CustomController
     public function dataProduk(){
         $produk = Produk::filter(\request(['produk','kategori']))->orderBy('created_at','DESC')->limit(4)->get();
         return $produk;
+    }
+
+    public function rating($id){
+        $rating = Produk::with('rating.user')->find($id);
+        return $rating;
     }
 }

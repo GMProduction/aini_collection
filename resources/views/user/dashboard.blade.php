@@ -61,6 +61,11 @@
                                         <i class='bx bx-check' ></i> Selesai
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a id="retur" class="nav-link" data-toggle="tab" href="/user/retur" role="tab">
+                                        <i class='bx bx-redo'></i> Retur
+                                    </a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a id="profil" class="nav-link" data-toggle="tab" href="/user/profile" role="tab">
@@ -98,6 +103,7 @@
             $("#dikemas").removeClass("active");
             $("#selesai").removeClass("active");
             $("#profil").removeClass("active");
+            $("#retur").removeClass("active");
 
             $('.slider').slick({
                 dots: true,

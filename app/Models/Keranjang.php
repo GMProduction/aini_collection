@@ -31,4 +31,7 @@ class Keranjang extends Model
     public function getPesanan(){
         return $this->belongsTo(Pesanan::class, 'id_pesanan');
     }
+    public function rating(){
+        return $this->hasOne(Rating::class,'id_keranjang');
+    }
 }

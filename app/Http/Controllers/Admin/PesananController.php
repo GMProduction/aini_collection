@@ -25,8 +25,12 @@ class PesananController extends Controller
                 $codeStatus = 3;
             }elseif ($status == 'Selesai'){
                 $codeStatus = 4;
-            }elseif ($status == 'Dikembalikan'){
+            }elseif ($status == 'Permintaan Retur'){
                 $codeStatus = 5;
+            }elseif ($status == 'Retur Ditolak'){
+                $codeStatus = 6;
+            }elseif ($status == 'Retur Diterima'){
+                $codeStatus = 7;
             }
             $pesanan->where('status_pesanan','=',$codeStatus);
         }

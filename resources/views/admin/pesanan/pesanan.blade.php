@@ -31,6 +31,9 @@
                                     <option value="Diproses">Diproses</option>
                                     <option value="Dikirim">Dikirim</option>
                                     <option value="Selesai">Selesai</option>
+                                    <option value="Permintaan Retur">Permintaan Retur</option>
+                                    <option value="Retur Ditolak">Retur Ditolak</option>
+                                    <option value="Retur Diterima">Retur Diterima</option>
                                 </select>
                             </form>
                         </div>
@@ -42,6 +45,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>No. Pesanan</th>
                     <th>Nama Pelanggan</th>
                     <th>Tanggal Pesan</th>
                     <th>Total Harga</th>
@@ -53,10 +57,11 @@
                 @forelse($data as $key => $d)
                     <tr>
                         <td>{{$key+1}}</td>
+                        <td>{{$d->no_pemesanan}}</td>
                         <td>{{$d->getPelanggan->nama}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_pesanan))}}</td>
                         <td>Rp. {{number_format($d->total_harga, 0)}}</td>
-                        <td>{{$d->status_pesanan == 1 ? 'Menungu Konfirmasi' : ($d->status_pesanan == 2 ? 'Dikemas' : ($d->status_pesanan == 3 ? 'Dikirim' : ($d->status_pesanan == 4 ? 'Selesai' : ($d->status_pesanan === 5 ? 'Dikembalikan' : 'Menunggu Pembayaran' ))))}}</td>
+                        <td>{{$d->status_pesanan == 1 ? 'Menungu Konfirmasi' : ($d->status_pesanan == 2 ? 'Dikemas' : ($d->status_pesanan == 3 ? 'Dikirim' : ($d->status_pesanan == 4 ? 'Selesai' : ($d->status_pesanan === 5 ? 'Permintaan Retur' : ($d->status_pesanan === 6 ? 'Retur Ditolak' : 'Retur Diterima') ))))}}</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm" data-id="{{$d->id}}" id="detailData">Detail
                             </button>
@@ -81,7 +86,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail <span id="no_pesanan"></span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -163,7 +168,13 @@
                                     <p class="mb-1">Status : <span id="dStatus" class="fw-bold"></span></p>
                                     <p id="dAlasan"></p>
                                 </div>
-
+                                <div class="mb-3 d-none" id="btnKonfirmasiRetur">
+                                    <label for="kategori" class="form-label">Konfirmasi Retur</label>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-sm btn-success me-2" onclick="saveKonfirmasi(7)">Terima</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="saveKonfirmasi(6)">Tolak</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -213,6 +224,7 @@
             $.get('/admin/pesanan/' + idPesanan, function (data) {
                 console.log(data);
                 $('#dNamaPelanggan').html(data['get_pelanggan']['nama'])
+                $('#no_pesanan').html('#'+data['no_pemesanan'])
                 $('#dChat').attr('href','https://wa.me/'+data['get_pelanggan']['no_hp'])
                 $('#dAlamatPengirimanKota').html(data['get_expedisi']['nama_kota'] + ' - ' + data['get_expedisi']['nama_propinsi'])
                 $('#dAlamatPengiriman').html(data['alamat_pengiriman'])
@@ -229,6 +241,7 @@
                 var txtStatus = 'Menunggu Pembayaran';
                 $('#btnKonfirmasi').addClass('d-none')
                 $('#btnKirim').addClass('d-none')
+                $('#btnKonfirmasiRetur').addClass('d-none')
                 $('#dAlasan').html('')
                 if (status === 1) {
                     $('#btnKonfirmasi').removeClass('d-none')
@@ -238,15 +251,18 @@
                     txtStatus = 'Dikemas'
                 }else if(status === 3){
                     txtStatus = 'Dikirim'
-                    if(data['get_retur'] && data['get_retur']['status'] === 0){
-                        txtStatus = 'Minta Retur'
-                        $('#dAlasan').html(data['get_retur']['alasan'])
-                    }
                 }else if(status === 4){
                     txtStatus = 'Selesai'
                 }else if(status === 5){
-                    txtStatus = 'Dikembalikan'
-                    $('#dAlasan').html(data['get_retur']['alasan'])
+                    txtStatus = 'Permintaan Retur'
+                    $('#dAlasan').html(data['alasan_retur'])
+                    $('#btnKonfirmasiRetur').removeClass('d-none')
+                }else if(status === 6){
+                    txtStatus = 'Retur Ditolak'
+                    $('#dAlasan').html(data['alasan_retur'])
+                }else if(status === 7){
+                    txtStatus = 'Retur Diterima'
+                    $('#dAlasan').html(data['alasan_retur'])
                 }
 
                 $('#dStatus').html(txtStatus)
@@ -274,6 +290,10 @@
                 title = 'Terima Pembayaran'
             }else if(a === 3){
                 title = 'Kirim Pesanan'
+            }else if (a === 6){
+                title = 'Tolak Retur'
+            }else if (a === 7){
+                title = 'Terima Retur'
             }
             var form_data = {
                 'status' : a,

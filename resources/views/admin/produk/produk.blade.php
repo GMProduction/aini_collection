@@ -53,7 +53,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="5">Tidak ada data produk</td>
+                        <td class="text-center" colspan="7">Tidak ada data produk</td>
                     </tr>
                 @endforelse
             </table>

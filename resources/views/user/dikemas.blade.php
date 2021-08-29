@@ -10,7 +10,7 @@
             <div class="row item-box mb-4">
                 <div class="col-12">
                     <div class="col">
-                        <p class="title mb-0">Nomor Pesanan : {{$d->id}}</p>
+                        <p class="title mb-0">Nomor Pesanan : {{$d->no_pemesanan}}</p>
                         <p class="qty">{{date('d F Y', strtotime($d->tanggal_pesanan))}}</p>
                         <hr>
                         <div class="row">

@@ -18,6 +18,7 @@ use App\Http\Controllers\User\MenungguController;
 use App\Http\Controllers\User\PembayaranController;
 use App\Http\Controllers\User\PengirimanController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ReturController;
 use App\Http\Controllers\User\SelesaiController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
@@ -56,7 +57,10 @@ Route::prefix('/user')->middleware(UserMiddleware::class)->group(function (){
     Route::get('/menunggu', [MenungguController::class,'index']);
     Route::get('/dikemas', [DikemasController::class,'index']);
     Route::match(['post','get'],'/pengiriman', [PengirimanController::class,'index']);
+    Route::post('/pengiriman-retur', [PengirimanController::class,'retur']);
     Route::get('/selesai', [SelesaiController::class, 'index']);
+    Route::post('/selesai/beri-rating', [SelesaiController::class, 'rating']);
+    Route::get('/retur', [ReturController::class, 'index']);
     Route::match(['post','get'],'/profile', [ProfileController::class, 'index']);
 
 });
@@ -93,6 +97,7 @@ Route::get('/get-produk-recomend', [\App\Http\Controllers\ProdukController::clas
 
 Route::get('/produk', [\App\Http\Controllers\ProdukController::class,'index']);
 Route::get('/produk/detail/{id}', [\App\Http\Controllers\ProdukController::class,'detail']);
+Route::get('/produk/detail/{id}/rating', [\App\Http\Controllers\ProdukController::class,'rating']);
 Route::post('/produk/detail/{id}', [\App\Http\Controllers\ProdukController::class,'simpanPesanan']);
 Route::get('/produk/detail/{id}/image', [\App\Http\Controllers\ProdukController::class,'getImageProduk']);
 

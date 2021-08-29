@@ -24,6 +24,7 @@ class KeranjangController extends CustomController
                 'biaya_pengiriman' => $this->request->get('ongkir'),
                 'id_user' => Auth::id(),
                 'total_harga' => $this->request->get('totalHarga'),
+                'no_pemesanan' => date('YmdHis')
             ];
 
             $dataExpedisi = [
@@ -36,6 +37,7 @@ class KeranjangController extends CustomController
                 'nama_propinsi' => $this->request->get('propinsi'),
                 'biaya'         => $this->request->get('ongkir'),
             ];
+
             $pesanan = Pesanan::create($dataPesanan);
             $pesanan->getExpedisi()->create($dataExpedisi);
             foreach ($keranjang as $k){

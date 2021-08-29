@@ -10,15 +10,18 @@
             <div class="row item-box mb-4">
                 <div class="col-12">
                     <div class="col">
-                       <div class="d-flex justify-content-between">
-                           <div>
-                               <p class="title mb-0">Nomor Pesanan : {{$d->id}}</p>
-                               <p class="qty">{{date('d F Y', strtotime($d->tanggal_pesanan))}}</p>
-                           </div>
-                           <div>
-                               <a class="btn bt-primary btn-sm" data-id="{{$d->id}}" id="showTerima">Terima</a>
-                           </div>
-                       </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="title mb-0">Nomor Pesanan : {{$d->no_pemesanan}}</p>
+                                <p class="qty">{{date('d F Y', strtotime($d->tanggal_pesanan))}}</p>
+                            </div>
+                            <div>
+                                @if($d->status_pesanan == 3)
+                                    <a class="btn bt-orange btn-sm" data-id="{{$d->id}}" id="showRetur">Retur</a>
+                                @endif
+                                <a class="btn bt-primary btn-sm" data-id="{{$d->id}}" id="showTerima">Terima</a>
+                            </div>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="row col-6">
@@ -69,7 +72,12 @@
                         </tbody>
                     </table>
                     <hr>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex {{$d->status_pesanan == 5 || $d->status_pesanan == 6 ? 'justify-content-between' : 'justify-content-end'}}">
+                        <div id="divRetur" class="{{$d->status_pesanan == 5 || $d->status_pesanan == 6 ? '' : 'd-none'}}">
+                            <p class="mb-1 fw-bold">Retur Barang</p>
+                            <p class="mb-1">Status : {{$d->status_pesanan == 5  ? 'Menunggu' : 'Ditolak'}}</p>
+                            <p>Alasan : {{$d->alasan_retur}}</p>
+                        </div>
                         <table class=" mt-3" width="30%">
                             <tr style="border: none">
                                 <td class="border-0"><p>Total Harga</p></td>
@@ -93,6 +101,30 @@
         @empty
             <h4 class="text-center">Tidak ada data pesanan</h4>
         @endforelse
+
+        <div class="modal fade" id="modalRetur" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Form Retur Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" onsubmit="return saveRetur()">
+                            @csrf
+                            <input id="id" name="id" hidden>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Alasan Retur</label>
+                                <textarea class="form-control" id="alasan" name="alasan_retur" required></textarea>
+                            </div>
+                            <div class="mb-4"></div>
+                            <button type="submit" class="btn bt-primary">Save</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </section>
 
 
@@ -101,7 +133,7 @@
 @section('scriptUser')
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $("#pengiriman").addClass("active");
         });
@@ -115,6 +147,16 @@
             saveDataObject('Terima Pesanan', form_data)
             return false;
         })
+
+        $(document).on('click', '#showRetur', function () {
+            $('#modalRetur #id').val($(this).data('id'))
+            $('#modalRetur').modal('show')
+        })
+
+        function saveRetur() {
+            saveData('Retur Barang', 'form', '/user/pengiriman-retur')
+            return false;
+        }
     </script>
 
 @endsection

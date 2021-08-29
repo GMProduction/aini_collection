@@ -7,12 +7,12 @@
 @endsection
 
 @section('content')
-<style>
-    .imgSlider:hover {
-        border: 2px solid red;
-        cursor: pointer;
-    }
-</style>
+    <style>
+        .imgSlider:hover {
+            border: 2px solid red;
+            cursor: pointer;
+        }
+    </style>
 
     <section class="container">
 
@@ -80,8 +80,15 @@
                     {!! $data->deskripsi !!}
                 </p>
             </div>
+
             <div class="row table-container">
-                <h5>Produk Serupa <span></span></h5>
+                <h5 class="mb-3">Ulasan</h5>
+                <div id="ulasan">
+
+                </div>
+            </div>
+            <div class="row table-container">
+                <h5 class="">Produk Serupa <span></span></h5>
                 <div class="row" id="produk" style="min-height: 400px">
                     @for($i = 0; $i < 4; $i++)
                         <div class="col shine mx-2"></div>
@@ -100,6 +107,7 @@
         var ongkir = 0, hargaPesanan, qty = 1, service, estimasi, total;
 
         $(document).ready(function () {
+
             hargaPesanan = parseInt('{{$data->harga}}');
             getImage()
             ganti()
@@ -113,6 +121,7 @@
             }
 
             getproduk();
+            getUlasan()
         })
 
         function afterOrder() {
@@ -124,7 +133,7 @@
             @if($data->sisa == 0)
             swal('Stok tidak tersedia');
             @else
-            saveData('Masukkan keranjang', 'form');
+            saveData('Beli sekarang', 'form', null, afterOrder);
             @endif
                 return false;
             @else
@@ -154,16 +163,15 @@
                 var sliderBawah = $('.slider-nav');
                 sliderAtas.empty();
                 sliderBawah.empty();
-                if (data.length > 0){
+                if (data.length > 0) {
                     $.each(data, function (key, value) {
                         sliderAtas.append('<div  style="height: 620px; display: flex; align-items: center; justify-content: center"><img src="' + value['url_foto'] + '" width="400" class="m-2" style="object-fit: cover"/></div>')
                         sliderBawah.append('<div class="imgSlider" style="height: 150px; width: 150px; display: flex; align-items: center; justify-content: center"><img src="' + value['url_foto'] + '" width="130" class="m-2" style="object-fit: cover"/></div>')
                     })
-                }else{
+                } else {
                     sliderAtas.append('<img src="{{asset('/static-image/noimage.jpg')}}" class="gambar-detail"/>')
                     sliderBawah.append('<img src="{{asset('/static-image/noimage.jpg')}}" class="m-2">')
                 }
-
 
                 sliderAtas.slick({
                     slidesToShow: 1,
@@ -232,6 +240,28 @@
             })
         }
 
+        function getUlasan() {
+            $.get(window.location.pathname+'/rating', function (data) {
+                $('#ulasan').empty();
+                $.each(data['rating'], function (key, value) {
+                    console.log(value)
+                    var star = '';
+                    for (var i = 1; i <= parseInt(value['rating']) ;i++){
+                    star += '<i class=\'bx bxs-star\' style="font-size: 1rem !important; color: orangered" ></i>';
+                    }
+                    $('#ulasan').append('<div class="">\n' +
+                        '                    <div>' +
+                        '                    <p class="fw-bold mb-0">'+value['user']['nama']+'</p>' +
+                        '                    </div>' +
+                        '                    <div style="">\n' +
+                        '                         '+star+' \n' +
+                        '                        <p>'+value['ulasan']+'</p>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '                <hr>')
+                })
+            })
+        }
 
     </script>
 @endsection

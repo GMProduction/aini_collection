@@ -24,6 +24,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>No Pesanan</th>
                     <th>Nama Pelanggan</th>
                     <th>Tanggal Pesan</th>
                     <th>Total Harga</th>
@@ -35,6 +36,7 @@
                 @forelse($data as $key => $d)
                     <tr>
                         <td>{{$key+1}}</td>
+                        <td>{{$d->no_pemesanan}}</td>
                         <td>{{$d->getPelanggan->nama}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_pesanan))}}</td>
                         <td>Rp. {{number_format($d->total_harga, 0)}}</td>
@@ -46,7 +48,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">Tidan ada data pesanan</td>
+                        <td colspan="7" class="text-center">Tidan ada data pesanan</td>
                     </tr>
                 @endforelse
 
@@ -61,7 +63,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail <span id="no_pesanan"></span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -193,6 +195,7 @@
             $.get('/admin/pesanan/' + idPesanan, function (data) {
                 console.log(data);
                 $('#dNamaPelanggan').html(data['get_pelanggan']['nama'])
+                $('#no_pesanan').html('#'+data['no_pemesanan'])
                 $('#dChat').attr('href','https://wa.me/'+data['get_pelanggan']['no_hp'])
                 $('#dAlamatPengirimanKota').html(data['get_expedisi']['nama_kota'] + ' - ' + data['get_expedisi']['nama_propinsi'])
                 $('#dAlamatPengiriman').html(data['alamat_pengiriman'])

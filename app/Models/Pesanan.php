@@ -18,7 +18,9 @@ class Pesanan extends Model
         'id_bank',
         'tanggal_pembayaran',
         'url_pembayaran',
-        'status_pesanan'
+        'status_pesanan',
+        'no_pemesanan',
+        'alasan_retur'
     ];
 
     protected $with = ['getExpedisi','getKeranjang'];
@@ -39,4 +41,6 @@ class Pesanan extends Model
     public function getBank(){
         return $this->belongsTo(Bank::class, 'id_bank');
     }
+
+
 }

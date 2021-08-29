@@ -38,4 +38,8 @@ class Produk extends Model
             return $query->where('nama_produk','like','%'.$produk.'%');
         });
     }
+
+    public function rating(){
+        return $this->hasMany(Rating::class, 'id_produk');
+    }
 }

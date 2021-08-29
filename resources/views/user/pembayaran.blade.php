@@ -43,7 +43,7 @@
                         <div>
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <p class="title mb-0">Nomor Pesanan : {{$d->id}}</p>
+                                    <p class="title mb-0">Nomor Pesanan : {{$d->no_pemesanan}}</p>
                                     <p class="qty">{{date('d F Y', strtotime($d->tanggal_pesanan))}}</p>
                                 </div>
                                 <div>
