@@ -61,7 +61,7 @@ $(document).ready(function(){
         }
 
         if (qty >= qtyMax) {
-          $this.attr("disabled", true);
+          // $this.attr("disabled", true);
         }
       } else {
         qty = qty <= qtyMin ? qtyMin : (qty -= 1);
@@ -71,7 +71,7 @@ $(document).ready(function(){
         }
 
         if (qty < qtyMax) {
-          $this.siblings(".qty-count--add").attr("disabled", false);
+          // $this.siblings(".qty-count--add").attr("disabled", false);
         }
       }
         qtyPesanan = qty;

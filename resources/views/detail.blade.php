@@ -66,7 +66,8 @@
 
                             <div class="mb-3"></div>
                             <div class="d-flex justify-content-around">
-                                <button type="submit" class="btn bt-primary w-50 mx-1"><i class='bx bxs-cart-add'></i> Masukkan Keranjang</button>
+                                <a type="submit" class="btn bt-primary w-10 mx-1" href="https://wa.me/send?phone=6289654649151&text=apakah stok untuk barang {{$data->nama_produk}} masih tersedia ?" target="_blank" style="background-color: #06D755"><i class='bx bxl-whatsapp bx-md'></i></a>
+                                <button type="submit" class="btn bt-primary w-50 mx-1"><i class='bx bxs-cart-add bx-md'></i> </button>
                                 <button type="button" class="btn bt-orange w-50 mx-1" onclick="beliSekarang()">Beli Sekarang</button>
                             </div>
 
