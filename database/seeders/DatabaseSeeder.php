@@ -16,22 +16,22 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-//        DB::table('users')->insert([
-//            'nama' => 'Admin',
-//            'username' => 'admin',
-//            'roles' => 'admin',
-//            'alamat' => 'solo',
-//            'no_hp' => '0123456',
-//            'password' => Hash::make('admin'),
-//        ]);
-
         DB::table('users')->insert([
-            'nama' => 'Pimpinan',
-            'username' => 'pimpinan',
-            'roles' => 'pimpinan',
+            'nama' => 'Admin',
+            'username' => 'admin',
+            'roles' => 'admin',
             'alamat' => 'solo',
             'no_hp' => '0123456',
-            'password' => Hash::make('pimpinan'),
+            'password' => Hash::make('admin'),
         ]);
+
+//        DB::table('users')->insert([
+//            'nama' => 'Pimpinan',
+//            'username' => 'pimpinan',
+//            'roles' => 'pimpinan',
+//            'alamat' => 'solo',
+//            'no_hp' => '0123456',
+//            'password' => Hash::make('pimpinan'),
+//        ]);
     }
 }
